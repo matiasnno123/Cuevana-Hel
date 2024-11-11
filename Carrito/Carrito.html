@@ -34,7 +34,6 @@
         .home-button:hover {
             background-color: #0056b3;
         }
-    
     </style>
 </head>
 <body>
@@ -80,10 +79,37 @@
             <p>Propina: <span id="tip-summary">0</span></p>
             <hr>
             <p class="total-price">Total a pagar: $<span id="total-summary">0</span></p>
-        </div>
-    </div>
+            
+            
+            <button class="btn btn-primary" data-bs-toggle="modal" data-ds-target="#pagar"> Pagar </button> 
 
-    <button class="home-button" href="/index.html">Home</button>
+            <div class="modal" id="pagar">
+            
+            <div class="modal-dialog">
+            <div class="modal-content">
+            
+            <div class="modal-header">
+            <h5 class="modal-title">Heladeria Cuevana</h5>
+            <button class="btn-close"></button>
+            </div>
+            
+            <div class="modal-body">
+            <p> Confirmar pedido</p>
+            </div>
+            
+            <div class="modal-footer">
+            <button class="btn btn-darget">Cancelar</button>
+            <button class="btn btn-primary">Confirmar</button>
+            </div>
+            
+            </div>
+            </div>
+            </div> 
+
+    <a href="/index.html"><button class="home-button">Home</button></a>
+
+
+  
 
     <script>
         var cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -107,6 +133,7 @@
             });
             document.getElementById('cart-items').innerHTML = cartItemsHTML;
             document.getElementById('product-price-summary').innerText = '$' + total.toLocaleString();
+            document.getElementById('total-modal').innerText = '$' + total.toLocaleString();
         }
 
         function removeItem(index) {
@@ -128,6 +155,13 @@
             document.getElementById('shipping-summary').innerText = shippingMethod;
             document.getElementById('tip-summary').innerText = tip;
             document.getElementById('total-summary').innerText = total.toLocaleString();
+            document.getElementById('total-modal').innerText = '$' + total.toLocaleString();
+        }
+
+        function confirmPayment() {
+            alert("Pago confirmado. ¡Gracias por tu compra!");
+            localStorage.removeItem('cart');
+            location.reload();
         }
 
         renderCart();
